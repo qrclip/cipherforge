@@ -1,0 +1,39 @@
+<span class="flex-auto">
+  <label class="font-bold block mb-2" for="errorCorrection">Error Correction</label>
+  <div class="p-fluid" style="width: 100%; min-width: 300px">
+    <p-dropdown
+      id="errorCorrection"
+      appendTo="body"
+      [options]="mErrorCorrections"
+      class="w-full"
+      optionLabel="name"
+      [(ngModel)]="mSelectedErrorCorrection"></p-dropdown>
+  </div>
+</span>
+
+<div style="height: 40px"></div>
+
+<span class="flex-auto">
+  <label class="font-bold block mb-2" for="version">Version</label>
+  <div class="p-fluid" style="width: 100%; min-width: 300px">
+    <p-dropdown
+      id="version"
+      appendTo="body"
+      [options]="mVersion"
+      class="w-full"
+      optionLabel="name"
+      [(ngModel)]="mSelectedVersion"></p-dropdown>
+  </div>
+</span>
+
+<div style="height: 40px"></div>
+
+<button
+  pButton
+  pRipple
+  label="OK"
+  type="button"
+  class="p-button"
+  style="width: 100%"
+  aria-label="OK"
+  (click)="onOK()"></button>

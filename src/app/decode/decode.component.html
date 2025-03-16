@@ -1,0 +1,79 @@
+<app-cf-top-menu
+  (eButtonClicked)="onMenuButtonClicked($event, filesInput)"
+  [mLabelA]="'SCAN'"
+  [mLabelB]="'SELECT FILES'"
+  [mStickyMenu]="true"
+  [mShowActionButtons]="mShowActionMenuButtons"
+  [mExpanded]="mMenuExpanded"
+  [mVisible]="mMenuVisible"></app-cf-top-menu>
+<input #filesInput (change)="onFilesSelected($event)" hidden multiple type="file" accept="image/*" />
+
+<div style="width: 100%; display: flex; flex-direction: column; align-items: center">
+  <div style="max-width: 800px; width: 100%">
+    <ng-container [ngSwitch]="mUIState">
+      <!--INITIAL-->
+      <ng-container *ngSwitchCase="'initial'">
+        <ng-container *ngIf="mChunks.length > 0">
+          <div class="cf-decode-incomplete-info-title">Incomplete Data Detected!</div>
+          <div class="cf-decode-incomplete-info">Please scan or select all remaining QR codes to retrieve the data</div>
+          <div class="cf-decode-chunk-container">
+            <div *ngFor="let chunk of mChunks" class="cf-decode-chunk" [ngClass]="{ 'cf-decode-chunk-ok': chunk.ok }">
+              {{ chunk.index + 1 }}
+            </div>
+          </div>
+        </ng-container>
+      </ng-container>
+
+      <!--WORKING-->
+      <ng-container *ngSwitchCase="'working'">
+        <div style="height: 30px"></div>
+        <div class="cf-progress-spinner-container">
+          <p-progressSpinner></p-progressSpinner>
+          <div class="cf-decode-working-info">{{ mWorkingInfo }}</div>
+        </div>
+      </ng-container>
+
+      <!--ERROR-->
+      <ng-container *ngSwitchCase="'error'">
+        <div style="height: 30px"></div>
+        <div class="cf-decode-error">
+          <span><strong>Oops! Something went wrong.</strong></span>
+          <span style="color: #ffffff">Please try again.</span>
+        </div>
+      </ng-container>
+
+      <!--DECODED-->
+      <ng-container *ngSwitchCase="'decoded'">
+        <div style="height: 20px"></div>
+        <app-cf-display-data [mCipherforgeDecoded]="mCipherforgeDecoded"></app-cf-display-data>
+      </ng-container>
+
+      <!--SCAN-->
+      <ng-container *ngSwitchCase="'scan'">
+        <div class="cf-decode-scan-info" [ngClass]="{ 'cf-decode-scan-info-detected': mScanDetected }">
+          {{ mScanInfo }}
+        </div>
+        <div class="cf-decode-camera" [ngClass]="{ 'cf-decode-camera-detected': mScanDetected }">
+          <app-cf-camera [mScanMode]="'binary'" (eScan)="onScan($event)"></app-cf-camera>
+        </div>
+        <div class="cf-decode-scan-back">
+          <button
+            pButton
+            pRipple
+            label="BACK"
+            type="button"
+            class="p-button-text"
+            aria-label="Back"
+            (click)="onExitCamera()"></button>
+        </div>
+      </ng-container>
+
+      <!--KEY AND PASS-->
+      <ng-container *ngSwitchCase="'keyAndPass'">
+        <app-cf-key-and-pass
+          [mCipherforgeMode]="mCipherforgeMode"
+          (eOpen)="onOpenWithKeyAndPassword($event)"></app-cf-key-and-pass>
+      </ng-container>
+    </ng-container>
+  </div>
+</div>

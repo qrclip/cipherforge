@@ -1,0 +1,41 @@
+<div style="height: 30px"></div>
+<span
+  class="flex-auto"
+  *ngIf="mCipherforgeMode === CipherforgeMode.KEY || mCipherforgeMode === CipherforgeMode.KEY_AND_PASSWORD">
+  <label class="font-bold block mb-2" for="key">Key</label>
+  <div style="display: flex; gap: 20px">
+    <div class="p-fluid" style="width: 100%">
+      <input type="text" pInputText id="key" [(ngModel)]="mKey" />
+    </div>
+    <button
+      type="button"
+      class="p-button-text"
+      pButton
+      icon="pi pi-qrcode"
+      (click)="onScanKey()"
+      aria-label="scan key qr code"></button>
+  </div>
+</span>
+
+<div style="height: 30px" *ngIf="mCipherforgeMode === CipherforgeMode.KEY_AND_PASSWORD"></div>
+
+<span
+  class="flex-auto"
+  *ngIf="mCipherforgeMode === CipherforgeMode.PASSWORD_ONLY || mCipherforgeMode === CipherforgeMode.KEY_AND_PASSWORD">
+  <label class="font-bold block mb-2" for="password">Password</label>
+  <div style="display: flex; gap: 20px">
+    <div class="p-fluid" style="width: 100%">
+      <p-password
+        autocomplete="false"
+        id="password"
+        [(ngModel)]="mPassword"
+        [feedback]="false"
+        [toggleMask]="true"></p-password>
+    </div>
+  </div>
+</span>
+
+<div style="height: 30px"></div>
+
+<!--OPEN-->
+<p-button label="OPEN" (onClick)="onOpen()" class="p-fluid"></p-button>

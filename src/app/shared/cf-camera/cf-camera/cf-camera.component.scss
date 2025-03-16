@@ -1,0 +1,22 @@
+.cf-video-wrapper {
+  align-items: center;
+  display: flex;
+  text-align: center;
+  flex-direction: column;
+  max-width: 100%;
+}
+
+.cf-video {
+  max-width: 100%;
+  border-radius: 20px;
+  overflow: clip;
+}
+
+.cf-camera-loading {
+  width: 100%;
+  min-height: 100%;
+  display: flex;
+  padding: 40px;
+  justify-content: center;
+  align-items: center;
+}

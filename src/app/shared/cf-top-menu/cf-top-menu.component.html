@@ -1,0 +1,48 @@
+<div
+  #twoButtonContainer
+  (window:resize)="onResize()"
+  class="cf-menu-wrapper"
+  [ngClass]="{ 'cf-menu-wrapper-visible': mVisible }">
+  <div class="cf-menu-logo-header" [ngClass]="{ 'cf-menu-logo-header-hide': !mExpanded }">
+    <img
+      src="assets/images/cipherforge-logo.svg"
+      width="128"
+      tabindex="0"
+      alt="cipherforge"
+      role="button"
+      (click)="onLogoClicked()"
+      (keydown)="onLogoClicked()"
+      aria-label="cipherforge home"
+      [ngClass]="{ 'cf-menu-expanded-logo-hide': !mExpanded }"
+      class="cf-menu-expanded-logo" />
+  </div>
+  <div class="cf-menu-button-wrapper" [ngClass]="{ 'cf-menu-button-wrapper-small': !mExpanded }">
+    <app-cf-top-menu-button
+      *ngIf="mShowActionButtons"
+      [sSmallMode]="!mExpanded"
+      (click)="onButtonClick('A')"
+      [mLabel]="mLabelA"
+      [sBaseWidth]="twoButtonContainer.offsetWidth"></app-cf-top-menu-button>
+    <div class="cf-menu-middle" [ngClass]="{ 'cf-menu-middle-collapsed': !mExpanded }">
+      <div class="cf-menu-vertical-line" [ngClass]="{ 'cf-menu-vertical-line-hide': !mExpanded }"></div>
+      <div
+        class="cf-menu-small-logo-hide"
+        [ngClass]="{ 'cf-menu-small-logo': !mExpanded }"
+        (click)="onLogoClicked()"
+        (keydown)="onLogoClicked()"
+        tabindex="1">
+        <img
+          src="assets/images/cipherforge-icon.svg"
+          class="cf-menu-small-logo-hide"
+          [ngClass]="{ 'cf-menu-small-logo': !mExpanded }"
+          alt="cipherforge" />
+      </div>
+    </div>
+    <app-cf-top-menu-button
+      *ngIf="mShowActionButtons"
+      [sSmallMode]="!mExpanded"
+      (click)="onButtonClick('B')"
+      [mLabel]="mLabelB"
+      [sBaseWidth]="twoButtonContainer.offsetWidth"></app-cf-top-menu-button>
+  </div>
+</div>

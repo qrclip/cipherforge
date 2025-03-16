@@ -1,0 +1,72 @@
+///////////////////////////////////////////////////
+// CONCEPT
+
+- encode a text or a file to qr codes by splitting the data in small chunks and encode to qr code
+- password protected and encrypted with a random key
+
+// WAYS TO ENCODE
+- 010 not encrypted
+- 020 encrypted with a random key (saved has a hex or qr code)
+- 030 encrypted with a random key, password protected
+- 040 encrypted just with a password ( saves the salt to a qr code )
+
+// PROTOCOL
+- encrypt the data
+- All using bytes
+
+- signature 3 bytes "CFQ" for example
+- 1 byte the version 001
+- 1 byte the encoded mode ( ways to encode, password, key etc. see // WAYS TO ENCODE )
+- The rest depends on the way to encode
+  - 010 - not encrypted
+    - 4 bytes ( int ) for the number of chunks
+    - the data itself
+  - 020 - encrypted with a random key
+    - 4 bytes ( int ) for the number of chunks
+    - the actual data
+  - 030 encrypted with a random key and password
+     - 4 bytes ( int ) for the number of chunks
+     - 16 byte random salt for the password
+     - actual data
+  - 040 encrypted with password only
+     - 4 bytes ( int ) for the number of chunks
+     - 16 byte random salt for the password
+     - actual data
+
+Version 40 , M
+Max Bytes 2367
+
+/////////////////////////////////////////////////////////
+// UI / UX
+
+/////////////////////////
+// ENCODE
+
+- file or text
+- key
+	- new
+	- use existing
+- password
+
+| GENERATE |
+
+// Display the number of qr codes (next and previous)
+	- save to images
+	- save to pdf (Page Size, QR code size, min margin)
+
+
+/////////////////////////
+// DECODE ( SCAN, PROCESS )
+
+- SCAN
+	- Scan QR Codes ( or use an image )
+	- After reading the first display information of total number
+	- scan interface until all the information is present
+
+	- after all data available
+		- ask for key and password if the case
+	- Display text or show file to download
+
+- PROCESS
+	- to get qr codes from pdfs and multiple images
+

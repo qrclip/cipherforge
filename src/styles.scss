@@ -1,0 +1,63 @@
+//@import "../node_modules/primeng/resources/themes/viva-dark/theme.css";
+@import "../node_modules/primeng/resources/primeng.min.css";
+@import "../node_modules/primeicons/primeicons.css";
+@import "../node_modules/primeflex/primeflex.css";
+@import "styles/theme";
+@import "./styles/theme-toast.css";
+@import "./styles/theme-fixes.scss";
+
+/* BODY */
+body {
+  //font-family: var(--font-family);
+  font-family: "Open Sans", sans-serif;
+
+  a:link {
+    color: #ffffff;
+  }
+
+  /* visited link */
+  a:visited {
+    color: #ffffff;
+  }
+
+  /* mouse over link */
+  a:hover {
+    color: #ffffff;
+  }
+
+  /* selected link */
+  a:active {
+    color: #ffffff;
+  }
+  background-color: #000122;
+}
+
+.cf-progress-spinner-container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+
+
+.cf-decode-error {
+  width: 100%;
+  text-align: center;
+  font-size: 2rem;
+  line-height: 2.6rem;
+  color: var(--primary-color);
+  display: flex;
+  flex-direction: column;
+}
+
+.cf-decode-working-info {
+  width: 100%;
+  text-align: center;
+  font-size: 1.2rem;
+  line-height: 2.0rem;
+  color: var(--primary-color);
+  display: flex;
+  flex-direction: column;
+  margin-top: 30px;
+}

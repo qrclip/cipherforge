@@ -1,0 +1,34 @@
+////////////////////////////////////////////////
+// HEADER FIRST CHUNK
+(3) TEXT      |   Signature 'CFF'
+(1) UINT8     |   Version
+(1) UINT8     |   Mode (CipherforgeMode)
+(4) UINT32    |   CHUNK COUNT
+
+// IN CASE PASSWORD IS NEEDED
+(16) BYTES    |   Password salt
+(1) UINT8     |   Ops
+(1) UINT8     |   Mem
+
+////////////////////////////////////////////////
+// DATA ( ENCRYPTED PART )
+
+(2) UINT16    |   Random Offset /////// AFTER THIS ALL THE DATA IS OFFSET BY THIS VALUE
+
+// COMPRESSED DATA ARRAY
+(4) UINT32    |   Text Size
+(*) ARRAY     |   Text Array
+(1) UINT8     |   File Count
+
+// FOR EACH FILE
+(2) UINT16    |   Filename Size
+(*) ARRAY     |   Filename Array
+(4) UINT32    |   File Array Size
+(*) ARRAY     |   File content Array
+
+
+////////////////////////////////////////////////
+// HEADER NEXT CHUNK
+(3) TEXT      |   Signature 'CFC'
+(4) UINT32    |   CHUNK NUMBER
+(*) ARRAY     |   Data

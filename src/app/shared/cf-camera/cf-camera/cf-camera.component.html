@@ -1,0 +1,10 @@
+<div *ngIf="mIsLoading">
+    <div class="cf-camera-loading">
+        <p-progressSpinner></p-progressSpinner>
+    </div>
+</div>
+<div class="cf-video-wrapper">
+    <video #video playsinline class="cf-video"></video>
+    <canvas #canvas style="display: none"></canvas>
+</div>
+

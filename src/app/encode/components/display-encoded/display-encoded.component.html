@@ -1,0 +1,150 @@
+<ng-container [ngSwitch]="mUIState">
+  <!--DISPLAY-->
+  <ng-container *ngSwitchCase="'display'">
+    <div class="cf-encoded-qr-header">
+      <!--NOT PLAYING UI-->
+      <ng-container *ngIf="!mPlayingQRCodes">
+        <button
+          pButton
+          pRipple
+          icon="pi pi-angle-left"
+          class="p-button-text"
+          (click)="onPreviousQRCode()"
+          aria-label="previous qr code"></button>
+        <div class="cf-encoded-qr-header-info">{{ mCurrentChunk + 1 }} / {{ mChunkNumber }}</div>
+        <button
+          pButton
+          pRipple
+          icon="pi pi-angle-right"
+          class="p-button-text"
+          (click)="onNextQRCode()"
+          aria-label="next qr code"></button>
+
+        <div style="flex-grow: 1"></div>
+        <!--styleClass="p-button-text"-->
+        <p-splitButton
+          label="PDF"
+          icon="pi pi-file-pdf"
+          (onClick)="onPDFExportSettings()"
+          [model]="mSplitMenuItems"></p-splitButton>
+      </ng-container>
+      <!--NOT PLAYING UI-->
+      <ng-container *ngIf="mPlayingQRCodes">
+        <button
+          pButton
+          pRipple
+          icon="pi pi-stop"
+          class="p-button"
+          (click)="onStopPlayQRCodes()"
+          aria-label="stop playing"></button>
+        <div class="cf-encoded-qr-header-info">{{ mCurrentChunk + 1 }} / {{ mChunkNumber }}</div>
+        <div style="flex-grow: 1"></div>
+        <span class="flex-auto">
+          <label class="block mb-1" for="delay">Delay</label>
+          <div style="height: 5px"></div>
+          <p-slider [(ngModel)]="mPlayQRCodesDelay" class="w-full" [min]="1" [max]="100" id="delay"></p-slider>
+        </span>
+      </ng-container>
+    </div>
+    <div style="display: flex; width: 100%; flex-direction: column; align-items: center">
+      <div style="display: flex">
+        <div class="cf-encoded-qr-display">
+          <canvas id="qr-canvas"></canvas>
+        </div>
+      </div>
+    </div>
+    <div style="height: 120px"></div>
+  </ng-container>
+  <!--DISPLAY-->
+  <ng-container *ngSwitchCase="'exporting'">
+    <div class="cf-exporting-progress-info">{{ mProgressInfo }}</div>
+    <p-progressBar *ngIf="mProgress >= 0" [value]="mProgress"></p-progressBar>
+  </ng-container>
+  <!--PDF SETTINGS-->
+  <ng-container *ngSwitchCase="'pdf-settings'">
+    <button
+      pButton
+      pRipple
+      label="BACK"
+      type="button"
+      class="p-button-text"
+      style="width: 100%"
+      aria-label="BACK"
+      (click)="onBackFromSettings()"></button>
+
+    <div class="cf-exporting-pdf-info">
+      Attention! Please make sure you select the best settings for the QR code version and print size. This will ensure
+      compatibility with your cell phone or any other device used to scan the QR codes. Please test if they work well.
+    </div>
+    <span class="flex-auto">
+      <label class="font-bold block mb-2" for="key">Public Name</label>
+      <div style="display: flex; gap: 20px">
+        <div class="p-fluid" style="width: 100%">
+          <input type="text" pInputText id="key" [(ngModel)]="mPDFExportOptions.name" />
+        </div>
+      </div>
+    </span>
+
+    <div style="height: 20px"></div>
+
+    <span class="flex-auto">
+      <label class="font-bold block mb-2" for="page-size">Page Size</label>
+      <div class="p-fluid" style="width: 100%; min-width: 300px">
+        <p-dropdown
+          id="page-size"
+          appendTo="body"
+          [options]="mPageSizes"
+          class="w-full"
+          optionLabel="name"
+          [(ngModel)]="mSelectedPageSize"
+          (ngModelChange)="onPageSizeChanged()"></p-dropdown>
+      </div>
+    </span>
+
+    <div style="height: 20px"></div>
+
+    <div class="formgrid grid">
+      <div class="field col">
+        <label class="font-bold block mb-2" for="page-size">Page Width:</label>
+        <app-cf-input-unit
+          [sUnit]="mSelectedPageSize.units"
+          [(ngModel)]="mPDFExportOptions.pageWidth"></app-cf-input-unit>
+      </div>
+      <div class="field col">
+        <label class="font-bold block mb-2" for="page-size">Page Height:</label>
+        <app-cf-input-unit
+          [sUnit]="mSelectedPageSize.units"
+          [(ngModel)]="mPDFExportOptions.pageHeight"></app-cf-input-unit>
+      </div>
+    </div>
+
+    <div style="height: 20px"></div>
+
+    <div class="formgrid grid">
+      <div class="field col">
+        <label class="font-bold block mb-2" for="page-size">QR Code Size:</label>
+        <app-cf-input-unit
+          [sUnit]="mSelectedPageSize.units"
+          [(ngModel)]="mPDFExportOptions.QRCodeSize"></app-cf-input-unit>
+      </div>
+      <div class="field col">
+        <label class="font-bold block mb-2" for="page-size">Min Margin:</label>
+        <app-cf-input-unit
+          [sUnit]="mSelectedPageSize.units"
+          [(ngModel)]="mPDFExportOptions.minMargin"></app-cf-input-unit>
+      </div>
+    </div>
+
+    <div style="height: 20px"></div>
+
+    <button
+      pButton
+      pRipple
+      label="DOWNLOAD PDF"
+      type="button"
+      class="p-button"
+      style="width: 100%"
+      aria-label="DOWNLOAD PDF"
+      (click)="finalizeExportPDF()"></button>
+  </ng-container>
+</ng-container>

@@ -1,0 +1,29 @@
+:host {
+  width: 50%;
+}
+
+.cf-menu-button {
+  flex-grow: 1;
+  text-align: center;
+  min-height: 100%;
+  display: flex;
+  align-items: center;
+  justify-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.cf-menu-label {
+  font-size: 0;
+  font-weight: bold;
+  background: -webkit-linear-gradient(#eee, #8277DA);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  word-break: normal;
+  text-align: center;
+  transition: all 0.6s ease-in-out;
+}
+
+.cf-menu-label:hover {
+  transform: scale(0.95);
+}

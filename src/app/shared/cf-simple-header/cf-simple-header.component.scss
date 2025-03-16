@@ -1,0 +1,34 @@
+:host {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  margin: 10px 0 10px 0;
+}
+
+.cf-menu-small-logo-hide {
+  height: 54px;
+  transition: all 1.0s ease-in-out;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.cf-menu-small-logo {
+  opacity: 1;
+}
+
+.cf-menu-small-logo:hover {
+  transform: scale(0.95);
+}
+
+.cf-header-text {
+  font-size: 2rem;
+  font-weight: bold;
+  color: var(--text-color-secondary);
+  transition: all 1.0s ease-in-out;
+  opacity: 1;
+}
+
+.cf-header-text-hide {
+  opacity: 0;
+}

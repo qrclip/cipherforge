@@ -1,0 +1,51 @@
+.cf-encoded-qr-display {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-radius: 20px;
+  background-color: #ffffff;
+  padding: 20px;
+}
+
+.cf-encoded-qr-header {
+  display: flex;
+  margin: 20px 0 20px 0;
+  min-width: 100%;
+  gap: 20px;
+}
+
+.cf-encoded-qr-header-info {
+  min-width: 120px;
+  line-height: 40px;
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: var(--primary-color);
+  text-align: center;
+}
+
+.cf-exporting-progress-info {
+  width: 100%;
+  text-align: center;
+  line-height: 3rem;
+  font-size: 1.2rem;
+  color: var(--primary-color);
+}
+
+.cf-encoded-delay-slider {
+  min-width: 100px;
+  height: 38px;
+  background-color: #1ea97c;
+  display: flex;
+  align-items: center;
+  align-content: center;
+  justify-items: center;
+  justify-content: center;
+}
+
+.cf-exporting-pdf-info {
+  width: 100%;
+  text-align: justify;
+  line-height: 1.6rem;
+  font-size: 1.0rem;
+  margin: 20px 0 20px 0;
+}

@@ -1,0 +1,35 @@
+.cf-encode-text-area {
+  width: 100%;
+  min-width: 100%;
+  max-width: 100%
+}
+
+.cf-encode-form-vertical-spacing {
+  height: 25px;
+}
+
+.cf-encode-file-footer {
+  width: 100%;
+  min-width: 100%;
+  display: flex;
+  flex-direction: row-reverse;
+  margin: 20px 0 10px 0;
+}
+
+.cf-encode-file-footer-no-files {
+  width: 100%;
+  min-width: 100%;
+  display: flex;
+  flex-direction: row-reverse;
+  margin: -35px 0 10px 0;
+}
+
+.cf-encode-card {
+  transition: all 1.0s ease-in-out;
+  opacity: 0;
+  height: 0;
+}
+
+.cf-encode-card-show {
+  opacity: 1;
+}

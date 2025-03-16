@@ -1,0 +1,82 @@
+.cf-decode-chunk {
+  display: flex;
+  max-width: 100px;
+  max-height: 100px;
+  min-width: 100px;
+  min-height: 100px;
+  border-radius: 50px;
+  background: #000122;
+  border: dashed 2px var(--primary-color);
+  color: var(--primary-color);
+  opacity: 1.0;
+  font-weight: bold;
+  font-size: 1.5rem;
+  align-items: center;
+  justify-content: center;
+}
+
+.cf-decode-chunk-ok {
+  opacity: 0.9;
+  color: #000122;
+  background: linear-gradient(to bottom, #ffffff 3%, #4c4d62 98%);
+  border: none;
+}
+
+.cf-decode-chunk-container {
+  max-width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+  margin-top: 30px;
+}
+
+.cf-decode-scan-info {
+  width: 100%;
+  text-align: center;
+  font-size: 1rem;
+  line-height: 2rem;
+  min-height: 2rem;
+  margin: 10px 0 10px 0;
+  transition: all 0.4s ease-in-out;
+  color: var(--text-color);
+}
+
+.cf-decode-scan-info-detected {
+  color: var(--primary-color);
+}
+
+.cf-decode-scan-back {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top:20px;
+}
+
+.cf-decode-incomplete-info-title {
+  text-align: center;
+  font-size: 2.0rem;
+  font-weight: bold;
+  width: 100%;
+  line-height: 2.6rem;
+  color: var(--primary-color);
+  padding-top:20px;
+}
+
+.cf-decode-incomplete-info {
+  text-align: center;
+  font-size: 1.2rem;
+  width: 100%;
+  line-height: 2rem;
+  padding-bottom: 20px;
+}
+
+.cf-decode-camera {
+  opacity: 1.0;
+  transition: all 0.3s ease-in-out;
+}
+
+.cf-decode-camera-detected {
+  opacity: 0.05;
+}

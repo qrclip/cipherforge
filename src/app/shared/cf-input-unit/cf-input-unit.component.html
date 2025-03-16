@@ -1,0 +1,29 @@
+<div class="p-fluid" style="min-width: 100%">
+  <ng-container *ngIf="mUnit === 'cm'">
+    <p-inputNumber
+      id="inputCm"
+      class="w-full"
+      [(ngModel)]="mValueCm"
+      mode="decimal"
+      [min]="0"
+      [minFractionDigits]="2"
+      [maxFractionDigits]="2"
+      [max]="200"
+      [suffix]="' cm'"
+      (ngModelChange)="onValueChanged('cm')"></p-inputNumber>
+  </ng-container>
+
+  <ng-container *ngIf="mUnit === 'inches'">
+    <p-inputNumber
+      id="inputInches"
+      class="w-full"
+      [(ngModel)]="mValueInches"
+      mode="decimal"
+      [min]="0"
+      [minFractionDigits]="2"
+      [maxFractionDigits]="2"
+      [max]="200"
+      [suffix]="' Inches'"
+      (ngModelChange)="onValueChanged('inches')"></p-inputNumber>
+  </ng-container>
+</div>
