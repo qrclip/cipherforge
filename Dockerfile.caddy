@@ -1,0 +1,46 @@
+# Build stage
+FROM node:18-alpine AS build
+
+# Install dependencies required for canvas
+RUN apk add --no-cache \
+    build-base \
+    g++ \
+    cairo-dev \
+    jpeg-dev \
+    pango-dev \
+    giflib-dev \
+    pixman-dev \
+    pangomm-dev \
+    libjpeg-turbo-dev \
+    freetype-dev \
+    python3
+
+WORKDIR /app
+
+# Copy package.json and package-lock.json
+COPY package*.json ./
+
+# Install dependencies with canvas support
+RUN npm install
+
+# Copy the rest of the application
+COPY . .
+
+# Build the application
+RUN npm run build -- --configuration production
+
+# Final stage with just the static files
+FROM caddy:2-alpine
+
+# Copy the built app from build stage to Caddy's site root
+COPY --from=build /app/dist/cipherforge /srv
+
+# We don't include a default Caddyfile here, so it can be mounted later
+# Create a directory for custom Caddyfile mounting
+RUN mkdir -p /etc/caddy
+
+# Set a default command that expects a mounted Caddyfile
+CMD ["caddy", "run", "--config", "/etc/caddy/Caddyfile"]
+
+# Expose ports
+EXPOSE 80 443

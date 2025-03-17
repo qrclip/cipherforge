@@ -1,0 +1,56 @@
+# This Nginx configuration was contributed by dangr
+# syntax = docker/dockerfile:1
+ARG NGINX_VERSION=1.27.4
+ARG NODE_VERSION=22.14.0
+
+
+### STAGE 1: Build ###
+FROM node:${NODE_VERSION}-alpine AS build
+WORKDIR /usr/src/app
+COPY package.json package-lock.json ./
+
+## Install build toolchain, install node deps and compile native add-ons
+RUN apk add --no-cache --virtual node-gyp build-base jpeg-dev pango-dev cairo-dev pkgconfig python3 make g++ \
+	&& npm install
+COPY . .
+RUN npm run build
+
+
+### STAGE 2: Run ###
+FROM nginx:${NGINX_VERSION}-alpine AS nginx
+ARG DOMAIN_NAME=localhost
+ARG DAYS_VALID=3650
+
+COPY --from=build /usr/src/app/dist/cipherforge /usr/share/nginx/html
+
+RUN apk add --no-cache openssl bash
+SHELL ["/bin/bash", "-c"]
+RUN echo "Creating self-signed certificate valid for ${DAYS_VALID} days for domain ${DOMAIN_NAME}" && \
+    openssl \
+    req -x509 \
+    -nodes \
+    -subj "/CN=${DOMAIN_NAME}}" \
+    -addext "subjectAltName=DNS:${DOMAIN_NAME}" \
+    -days ${DAYS_VALID} \
+    -newkey rsa:4096 -keyout /etc/ssl/private/selfsigned.key \
+    -out /etc/ssl/certs/selfsigned.crt
+
+
+COPY <<EOF /etc/nginx/conf.d/default.conf
+server {
+    listen 80;
+    listen [::]:80;
+    listen 443 ssl;
+    listen [::]:443 ssl;
+    ssl_certificate /etc/ssl/certs/selfsigned.crt;
+    ssl_certificate_key /etc/ssl/private/selfsigned.key;
+    location / {
+        root   /usr/share/nginx/html;
+        index  index.html index.htm;
+    }
+    error_page   500 502 503 504  /50x.html;
+    location = /50x.html {
+        root   /usr/share/nginx/html;
+    }
+}
+EOF

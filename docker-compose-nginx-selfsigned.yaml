@@ -1,0 +1,14 @@
+version: '3'
+
+services:
+  cipherforge:
+    build:
+      context: .
+      dockerfile: Dockerfile.nginx.selfsigned
+      args:
+        - DOMAIN_NAME=myapp.local
+        - DAYS_VALID=365
+    ports:
+      - "80:80"
+      - "443:443"
+    restart: unless-stopped

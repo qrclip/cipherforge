@@ -21,6 +21,7 @@
   - [Building Web Workers](#building-web-workers)
 - [Usage](#usage)
 - [Common Use Cases](#common-use-cases)
+- [Deployment](#deployment)
 - [License](#license)
 - [Contributing](#contributing)
 - [Support & Contact](#support--contact)
@@ -162,6 +163,24 @@ Cipherforge is ideal for:
 - **Emergency Information**: Store critical personal or medical data
 - **Sensitive Documents**: Backup small confidential files
 - **Legal Documents**: Secure storage of wills, contracts, or deeds
+
+## Deployment
+
+CipherForge is available as a Docker image with Caddy server for automatic SSL:
+
+```bash
+# Pull and run the official image
+docker run -p 80:80 -p 443:443 -v ./Caddyfile:/etc/caddy/Caddyfile qrclip/cipherforge
+```
+
+Or use Docker Compose:
+
+```bash
+# Using the pre-built image
+docker-compose -f docker-compose-caddy.yaml up -d
+```
+
+For detailed deployment instructions and alternative options, see [DEPLOYMENT.md](DEPLOYMENT.md).
 
 ## License
 

@@ -1,0 +1,19 @@
+version: '3'
+
+services:
+  cipherforge:
+    image: qrclip/cipherforge:latest
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      # Mount your local Caddyfile
+      - ./Caddyfile:/etc/caddy/Caddyfile
+      # Persist Caddy data (certificates, etc.)
+      - caddy_data:/data
+      - caddy_config:/config
+    restart: unless-stopped
+
+volumes:
+  caddy_data:
+  caddy_config:

@@ -1,0 +1,44 @@
+{
+    # Global options
+    email your-email@example.com  # Used for Let's Encrypt notifications
+    # Enable auto HTTPS - comment this out during local development
+    # auto_https off
+}
+
+# For local development, use localhost
+:80 {
+    # For production, replace with your actual domain
+    # your-domain.com {
+    
+    # Enable compression
+    encode gzip zstd
+    
+    # Serve static files
+    root * /srv
+    
+    # Enable logging
+    log {
+        output stdout
+        format console
+    }
+    
+    # Handle Angular routing by trying files or returning index.html
+    try_files {path} {path}/ /index.html
+    
+    # File server
+    file_server
+    
+    # Add security headers
+    header {
+        # Enable HSTS
+        Strict-Transport-Security "max-age=31536000; includeSubDomains; preload"
+        # Prevent MIME type sniffing
+        X-Content-Type-Options "nosniff"
+        # Prevent clickjacking
+        X-Frame-Options "DENY"
+        # Enable XSS protection
+        X-XSS-Protection "1; mode=block"
+        # Restrict referrer information
+        Referrer-Policy "strict-origin-when-cross-origin"
+    }
+}
