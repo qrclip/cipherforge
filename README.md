@@ -6,7 +6,6 @@
   <br>
   Transform and safeguard your data in offline QR codes for easy, secure retrieval.
   <br>
-  <a href="https://cipherforge.com">cipherforge.com</a>
 </p>
 
 ## Table of Contents
@@ -38,8 +37,6 @@ Cipherforge is a practical solution for secure offline data storage, developed b
 No continuous cloud support or external servers are required. This makes it perfect for passwords, 2FA tokens, crypto keys, or emergency backups.
 
 To learn more about the technology and encryption methods behind Cipherforge, check out our detailed [Cipherforge Blog Post](https://www.qrclip.io/blog/cipherforge-encrypted-qr-code-data-storage-system).
-
-You can also try the app directly at [cipherforge.com](https://cipherforge.com).
 
 ## Why Use Cipherforge?
 
